@@ -5,29 +5,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class Home extends PageObject { //significa que ele continua de onde a pageobject comecou, por isso ela extende
+public class Home extends PageObject{
+    @FindBy(xpath = "//header/div[1]/div[1]/div[3]/div[1]/fieldset[1]/input[2]")
+    private WebElement caixaPesquisa;
 
-   //Atributos / Elementos da Pagina
-    @FindBy(id = "search") //mesma coisa que o findElemente
-    private WebElement busca; //eh o apelido
-
-    @FindBy(css = "button.button-search")
+    @FindBy(css = "btn-buscar")
     private WebElement lupa;
 
-      // Construtor Obrigatorio
-
-    public Home(WebDriver driver){
+    public Home(WebDriver driver) {
         super(driver);
     }
 
     public void buscarProdutoComEnter(String produto){
-        busca.clear();
-        busca.sendKeys(produto + Keys.ENTER); //escrever o termo e dar enter
+        caixaPesquisa.clear();
+        caixaPesquisa.sendKeys(produto + Keys.ENTER);
     }
-    public void buscarProdutoComLupa(String produto) {
-        busca.sendKeys(produto);
-        lupa.click();
-    }
-
-
 }
