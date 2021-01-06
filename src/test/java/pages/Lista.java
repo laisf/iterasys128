@@ -6,30 +6,41 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class Lista extends PageObject {
-    //resultado para
-    @FindBy(xpath = "//body/div[10]/div[1]/div[1]/div[1]/div[5]/ul[1]/li[3]")
-    private WebElement resultadoParaProduto;
+    //Resultado para...
+    @FindBy(css = "h1.h2Categoria.nomeCategoria")
+    private WebElement resultadosParaProduto;
 
+    // Mensagem de Erro
+    @FindBy(css = "span.descricao-lucene:nth-child(2)")
+    private WebElement mensagemDeErro;
 
     public Lista(WebDriver driver) {
         super(driver);
     }
 
+    // Ler o que está na linha do Resultado
+    public String lerResultadoParaProduto(){
+        return resultadosParaProduto.getText();
 
-    public String lerResultadoParaProduto() {
-        return resultadoParaProduto.getText();
     }
 
+    // Ler a mensagem de erro
+    public String lerMensagemDeErro(){
+        return mensagemDeErro.getText();
 
+    }
+
+    // Ler Titulo Aba
     public String lerTituloAba() {
         return driver.getTitle();
 
     }
-
     // Clicar no produto escolhido
-    public void clicarNoProdutoDaLista(String produtoDescricao) {
-        WebElement nomeDoProduto = driver.findElement(By.xpath("//a[contains(text(),'"+produtoDescricao+"')]"));
+    public void clicarNoProdutoNaLista(String produtoDescricao){
+        WebElement nomeDoProduto = driver.findElement(By.xpath("//h3[contains(.,'" + produtoDescricao + "')]"));
         nomeDoProduto.click();
+
     }
+
 
 }
